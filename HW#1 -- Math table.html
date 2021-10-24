@@ -8,46 +8,68 @@
         
     </head>
     <body>
-        <h2 id="title">Piosson Probabilities</h2>
-    
-             <input type="number" id="ex" value="0" onchange="calculate()" style="display: inline;">
-             <p style="display: inline;" > &nbsp; λ = </p>
-             <input type="number" id="lam" value="1" onchange="calculate()" style="display: inline;">
-             <span id="res">   P(x,λ) = 0.3679 </span> 
-             <pre id="out">      λ=0.5   λ=1   λ=1.5   λ=2   λ=2.5   λ=3<br>x=0  0.6065 0.3679 0.2231 0.1353 0.0821 0.0498<br>x=1  0.3033 0.3679 0.3347 0.2707 0.2052 0.1494<br>x=2  0.0758 0.1839 0.2510 0.2707 0.2565 0.2240<br>x=3  0.0126 0.0613 0.1255 0.1804 0.2138 0.2240<br>x=4  0.0016 0.0153 0.0471 0.0902 0.1336 0.1680<br>x=5  0.0002 0.0031 0.0141 0.0361 0.0668 0.1008<br>x=6  0.0000 0.0005 0.0035 0.0120 0.0278 0.0504<br>x=7  0.0000 0.0001 0.0008 0.0034 0.0099 0.0216<br>x=8  0.0000 0.0000 0.0001 0.0009 0.0031 0.0081
+        <h2 id="title">Velocities table</h2>
+              t= &nbsp
+             <input type="number" id="time" value="0" onchange="calculate()" style="display: inline;">
+             <p style="display: inline;" > &nbsp; d = </p>
+             <input type="number" id="destance" value="1" onchange="calculate()" style="display: inline;">
+             <span id="res">   P(t,d) = 0.3679 </span> 
+             <pre id="out">      
              </pre>
 
              <hr>
+             <strong>    Sample code :</strong>
+             <pre> 
+                 
+            function velocity(t, d, f=2) {
+            let v = 0;
+            for (let k=1; k<=t; k++) v = d/t
+            return v.toFixed(f)
+                
+            }
+            <br>
+            function doTable() {
+                const d = [1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+                let a = d.map((d) => 'd='+d)
+                let str = header(a)
+                for (let t=1; t<=9;t++) { 
+                let a = d.map((d) => velocity (t, d)) 
+                str += oneLine(a, t)
+                }
+                return str
+            }
+        
+            </pre>
              <script>
                     "use strict";
-                    function poisson(x, λ, f=4) {
-                        let p = Math.exp(-λ)
-                        for (let k=1; k<=x; k++) p = p*λ/k
-                        return p.toFixed(f)
+                    function velocity(t, d, f=2) {
+                        let v = 0;
+                        for (let k=1; k<=t; k++) v = d/t
+                        return v.toFixed(f)
                     }
                     function calculate() {
-                        let x = Number(ex.value)
-                        if (!Number.isInteger(x)) {
-                        x = Math.round(x); ex.value = x
+                        let t = Number(time.value)
+                        if (!Number.isInteger(t)) {
+                        t = Math.round(t); time.value = t
                         }
-                        let λ = Number(lam.value)
-                        res.innerText = "P(x, λ) = "+poisson(x, λ)
+                        let d = Number(destance.value)
+                        res.innerText = "P(t, d) = "+velocity (t, d)
                     }
                     function doTable() {
-                        const L = [0.5, 1, 1.5, 2, 2.5, 3]
-                        let a = L.map((λ) => 'λ='+λ)
+                        const d = [1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+                        let a = d.map((d) => 'd='+d)
                         let str = header(a)
-                        for (let x=0; x<=8; x++) { 
-                        let a = L.map((λ) => poisson(x, λ))
-                        str += oneLine(a, x)
+                        for (let t=1; t<=9;t++) { 
+                        let a = d.map((d) => velocity (t, d)) 
+                        str += oneLine(a, t)
                         }
                         return str
                     }
                     let header  = (a) => '      '+ a.join('   ')  //pre
-                    let oneLine = (a, x) => '\nx='+x+'  '+ a.join(' ')
+                    let oneLine = (a, t) => '\nt='+t+'  '+ a.join('   ')
                         
-                        title.innerText = document.title
-                        sample.innerText = poisson+'\n'+doTable
+                       // out.innerText = document.title
+                        //sample.innerText = velocity +'\n'+doTable
                         calculate()
                         out.innerText = doTable()
 
