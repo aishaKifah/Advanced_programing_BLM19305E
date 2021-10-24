@@ -1,12 +1,5 @@
-pre {
-    display: block;
-    font-family: monospace;
-    white-space: pre;
-    margin: 1em 0px;
-    overflow-x: auto;
 
-}
 
 body{
-    background-color: aqua;
+    background-color: #F0FFFF;
   }
