@@ -53,11 +53,7 @@ async function  shaFromBuffer(buf) { //ArrayBuffer or ArrayBufferView
    let hash_array = Array.from(new Uint8Array(hash_buffer));
    let hash_hex_str = hash_array.map(byte =>
      ("00" + byte.toString(16)).slice(-2)).join("");
-    //var toHex = b=>b.toString(16).padStart(2,'0');
-   // p= crypto.subtle.digest('SHA-1', new TextEncoder().encode(buf))
-    //.then(x=>[...new Uint8Array(x)].map(toHex).join(''))
-    //.then(a=> disp1.innerText=a)
-    //.catch(console.log(msg.innerText))
+    
     console.log('\nEncodded buffer : '+buffer+'\nhash_buffer: '+ hash_buffer+' \nhash_array'+ hash_array+'\nhash_hex_str: '+hash_hex_str)
     disp1.innerText=hash_hex_str;
   } 
