@@ -47,33 +47,23 @@
 "use strict";
 const RDR = new FileReader();
 function displayURL(u) {
-                const imgurl = u;
-                fetch(imgurl)
+                fetch(u)
                 .then(response => response.blob())
-                .then(myBlob => {
-                var urlCreator = window.URL || window.webkitURL;
-                var imageUrl = urlCreator.createObjectURL(myBlob);
-                const myImgElem = document.getElementById('my-img');
-                myImgElem.src = imageUrl
-                console.log(u+" fteched and displayed succesfully !")
-                })
-            .catch( msg.innerText += console.error)
+                .then(displayBlob)
+            .catch( console.log( msg.innerText) )
 }
 function displayBlob(f) {
-    let myImgElem="";
     console.assert(f instanceof Blob)
     msg.innerText = f.size+" bytes "+f.type
+    console.log(f.size+" bytes "+f.type)
     disp1.innerText = ""; disp2.src = ""
     if (f.type.startsWith("image")) {
         RDR.readAsDataURL(f); //display image
-        RDR.onload = () =>  myImgElem = document.getElementById('disp2');
-                myImgElem.src = imageUrl
-
-      // Read in the image file as a data URL.
-    
+        RDR.onload = () =>  disp2.src=RDR.result                    
     } else if (f.type.startsWith("text")) {
         RDR.readAsText(f);  //display text
-        RDR.onload = () => console.log(f, RDR)
+        RDR.onload=()=> disp1.innerText=RDR.result
+        console.log(f, RDR)
     } else {
         msg.innerText += " -- Unknown"
     }
