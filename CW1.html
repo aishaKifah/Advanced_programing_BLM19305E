@@ -1,0 +1,73 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sayac </title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+    input { width: 50px }
+    .out {
+        font-size: 18px;
+        background: yellow;
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+  </style>
+</head>
+
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+
+<h2>Sayac</h2>
+Sayi gir: 
+<input type="number" value="0" onchange="out.innerText=value">
+&emsp;
+<button onclick="increment()">arttir</button>
+<p class="out">1</p>
+
+<hr>
+<b>Sample code</b>
+<pre>function increment() {<br>    let c = Number(out.innerText)+1<br>    console.log("counter = "+c)<br>    out.innerText = c<br>}</pre>
+
+<hr>
+
+<p>Printing a triangle</p>
+<script>
+   var i, j;
+   for(i=1; i < 7; i++) {
+      //inner loop
+     for(j=1; j<=i; j++) {
+        document.write('#');
+   }
+   document.write('<br/>');
+}
+</script>
+<p>Ref: <a href="https://www.w3schools.com/js/" target="NewTab">JS Tutorial</a>
+</p>
+
+<script>
+"use strict";
+// JavaScript comment
+function increment() {
+    let c = Number(out.innerText)+1
+    console.log("counter = "+c)
+    out.innerText = c
+}
+
+function print_triangle(){
+    var i, j;
+   for(i=1; i < 7; i++) {
+      //inner loop
+     for(j=1; j<=i; j++) {
+        document.write('#');
+   }
+   document.write('<br/>');
+}}
+document.querySelector('h2').innerText = document.title
+document.querySelector('pre').innerText = increment +'\n'+print_triangle
+const out = document.querySelector('.out'); increment() 
+</script>
+
+
+
+</body></html>

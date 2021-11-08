@@ -1,0 +1,101 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sayac </title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+    input { width: 50px }
+    .out {
+        font-size: 18px;
+        background: yellow;
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+  </style>
+</head>
+
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+    start:
+    <input id="start" type="number" value="0" onchange="range(),sum()">
+    end:
+    <input id="end" type="number" value="0" onchange="range(),sum()">
+
+    <p id="result"> Numbers between selected start and end : 0</p>
+    <p id ="sum"> sum : 0</p>
+    <p>Ref: <a href="https://www.w3schools.com/js/" target="NewTab">JS Tutorial</a>
+    </p>
+
+    <hr>
+<b>Sample code</b>
+<pre id="sample">function range(start, end){
+    array=[];
+    if(start> end){
+        counter=start;
+        while(counter>= end){
+            array.push(counter);
+            counter-=1;
+        }
+    }else{
+        counter=start;
+        while(counter<= end){
+            array.push(counter);
+            counter+=1;
+        }
+    }
+    return array;
+}<br>    <br>}</pre>
+
+
+<hr>
+
+
+
+<script>
+"use strict";
+// JavaScript comment
+
+function range(){
+    let array=[];
+    if(Number(document.getElementById('start').value) > Number(document.getElementById('end').value)){
+        let counter=Number(document.getElementById('start').value);
+        while(counter>= Number(document.getElementById('end').value)){
+            array.push(counter);
+            counter-=1;
+        }
+    }else{
+        let counter=Number(document.getElementById('start').value);
+        while(counter<= Number(document.getElementById('end').value)){
+            array.push(counter);
+            counter+=1;
+        }
+    }
+  
+    document.getElementById('result').innerText = 'Numbers between selected start and end :'+array
+    return array;
+}
+document.querySelector('pre').innerText = range +'\n'+sum
+
+function sum(){
+    let array=  range(document.getElementById('start').value , Number(document.getElementById('end').value))
+
+    let sum=0;
+    let counter=0;
+    while(counter < array.length){
+        sum+=array[counter];
+        counter+=1;
+    }
+    console.log(array)
+    document.getElementById('sum').innerText = 'sum: '+sum
+
+  
+
+    }
+
+
+</script>
+
+
+
+</body></html>
