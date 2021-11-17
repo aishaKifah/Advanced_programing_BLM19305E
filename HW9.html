@@ -1,0 +1,101 @@
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="favicon.ico">
+        <meta name="viewport" content="width=device-width">
+        <title>Velocities table</title>
+        <link rel="stylesheet" href="style.css">
+
+        
+    </head>
+    <body>
+        <h2 id="title">Distance matrix</h2>
+
+             <pre id="out">    </pre>
+             <pre id="aaa">     </pre>
+
+             <img src="https://46gyn61z4i0t1u1pnq2bbk2e-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/How-to-create-a-distance-matrix.png" alt="">
+             <br>
+             <a href="https://www.displayr.com/what-is-a-distance-matrix/">Ref</a> 
+
+             <hr>
+             <strong>Sample code :</strong>
+             <pre id="sample_code"> 
+                 
+            function velocity(t, d, f=2) {
+            let v = 0;
+            for (let k=1; k<=t; k++) v = d/t
+            return v.toFixed(f)
+                
+            }
+            <br>
+            function doTable() {
+                const d = [1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+                let a = d.map((d) => 'd='+d)
+                let str = header(a)
+                for (let t=1; t<=9;t++) { 
+                let a = d.map((d) => velocity (t, d)) 
+                str += oneLine(a, t)
+                }
+                return str
+            }
+        
+            </pre>
+             <script>
+                    "use strict";
+                    function distanceCal(p0,p1){
+                        let x=p0[0]-p1[0]
+                        let y=p0[1]-p1[1]
+                        return Math.sqrt((x * x + y * y) + 0.5).toFixed(2)
+
+                    }
+                    
+              
+                    function doTable() {
+                        const coordinates = [[9,49],[24,54],[51,28],[81,54],[81,23],[86,32]]
+                        const points=['A','B','C','D','E','F']
+                        let dis=[]
+                        let a = points.map((p) => '  '+p)
+                        let str = header(a)
+                        for (let i=0; i<=5;i++) { 
+                            for(let j=0 ; j<=5;j++){
+                                
+                                dis[j]=Math.round(distanceCal (coordinates[i], coordinates[j]))
+                                if(dis[j]==1)
+                                    dis[j]=0
+                            }
+                           // let a = points.map((d) => dis) 
+
+                            str += oneLine(points[i],dis)
+
+                        
+                        }
+                        return str
+                    }
+
+                    function doTable2() {
+                        const coordinates = [[9,49],[24,54],[51,28],[81,54],[81,23],[86,32]]
+                        const dim=['x','y']
+                        const points=['A','B','C','D','E','F']
+                        let a = dim.map((d) => '  '+d)
+                        let str = header1(a)
+                        for (let i=0; i<=5;i++) { 
+                        str += oneLine1(points[i],coordinates[i][0],coordinates[i][1])
+                        }
+                        return str
+                    }
+                    let header  = (a) => '  '+ a.join('  ')  //pre
+                    let oneLine = (p,a) => '\n '+p+'  ' + a.join('   ')
+
+                    let header1  = (a) => ' '+ a.join('  ')  //pre
+                    let oneLine1 = (p,x,y) => '\n '+ p+'  '+x +'  '+ y
+                        
+                       // out.innerText = document.title
+                        //sample.innerText = velocity +'\n'+doTable
+                    out.innerText = doTable()
+                    aaa.innerText=doTable2()
+                    sample_code.innerText=distanceCal +'\n'+doTable
+
+             </script>      
+    </body>    
+</html>
