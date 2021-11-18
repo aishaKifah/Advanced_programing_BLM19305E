@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+    <title id="headerTitle">AYCHA YAHIA</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body >
+   <h1>Battary Status:</h1>
+   <div id="levelchange">(levelchange state unknown)</div>
+
+   <div id="chargingchange">(charging state unknown)</div>
+   <h1>Online Status:</h1>
+
+   <div id="windowStatus" ></div>
+   <h1>Keybord Status:</h1>
+
+   <div id="keyPressed" ></div>
+
+
+   <script>
+       function chargingStatus(b){
+                if(b==true)
+                 chargingchange.innerText='charge plugged on '
+                 else if(b==false)
+                 chargingchange.innerText='charge plugged off'
+                }
+ 
+  navigator.getBattery().then(b =>  levelchange.innerText = 'Battary level:'+ b.level *100+'%'
+            )
+        navigator.getBattery().then(b =>   b.onlevelchange=e => levelchange.innerText ='Battary level:'+  b.level*100+'%' 
+            )
+            navigator.getBattery().then(b =>  chargingStatus() )
+
+        navigator.getBattery().then(b =>  b.onchargingchange =e=> chargingStatus(b.charging))
+        var x = "Is the browser online? " + navigator.onLine;
+
+
+
+        window.onoffline = (e) => { windowStatus.innerText='disconnected -- offline'};
+        window.ononline = (e) => { windowStatus.innerText='Connected -- online'};
+
+        window.onkeydown=e=>{
+
+            // CTRL + Alt 
+            if (e.shiftKey || e.key=="a" ) {
+                document.body.style.background="yellow";
+                keyPressed.innerText = 'Shift + a';
+            }
+            }
+            window.onkeyup=e=>{
+            console.log('hereAA')
+
+            // CTRL + Alt 
+            if (e.shiftKey || e.key=="a" ) {
+                document.body.style.background="white";
+                keyPressed.innerText = 'Shift + a';
+            }
+            }
+            
+
+      
+
+       
+        
+    
+   </script>
+
+
+</body>
+</html>
