@@ -44,8 +44,8 @@
 
         window.onkeydown=e=>{
 
-            // CTRL + Alt 
-            if (e.shiftKey || e.key=="a" ) {
+            // shift + a 
+            if (event.shiftKey && event.key==='a' ) {
                 document.body.style.background="yellow";
                 keyPressed.innerText = 'Shift + a';
             }
@@ -53,8 +53,8 @@
             window.onkeyup=e=>{
             console.log('hereAA')
 
-            // CTRL + Alt 
-            if (e.shiftKey || e.key=="a" ) {
+            // shift + a 
+            if (event.shiftKey && event.key==='a' ) {
                 document.body.style.background="white";
                 keyPressed.innerText = 'Shift + a';
             }
