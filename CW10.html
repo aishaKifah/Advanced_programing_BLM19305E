@@ -32,7 +32,7 @@
             )
         navigator.getBattery().then(b =>   b.onlevelchange=e => levelchange.innerText ='Battary level:'+  b.level*100+'%' 
             )
-            navigator.getBattery().then(b =>  chargingStatus() )
+            navigator.getBattery().then(b =>  chargingStatus(b.charging) )
 
         navigator.getBattery().then(b =>  b.onchargingchange =e=> chargingStatus(b.charging))
         var x = "Is the browser online? " + navigator.onLine;
