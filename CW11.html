@@ -82,7 +82,7 @@
       avatar_.src =u.avatar_url
       //add name and location
       let s = (u.name || u.login)
-      name_.innerHTML= BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+ 'Name:'+s
+      name_.innerHTML= BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+BR+ 'Name:'+ '<strong> '+s+'</strong>' 
       user_name.innerText='Username: '+u.login
       if(u.company) org.innerText='Company: '+u.company
 
