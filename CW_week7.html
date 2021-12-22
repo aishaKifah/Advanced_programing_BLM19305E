@@ -50,7 +50,7 @@ function displayURL(u) {
                 fetch(u)
                 .then(response => response.blob())
                 .then(displayBlob)
-            .catch( console.log( msg.innerText) )
+            .catch( error=> disp1.innerText=error )
 }
 function displayBlob(f) {
     console.assert(f instanceof Blob)

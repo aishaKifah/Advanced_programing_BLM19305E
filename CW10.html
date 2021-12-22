@@ -14,7 +14,7 @@
    <div id="chargingchange">(charging state unknown)</div>
    <h1>Online Status:</h1>
 
-   <div id="windowStatus" ></div>
+   <div id="windowStatus" > Connected -- online</div>
    <h1>Keybord Status:</h1>
 
    <div id="keyPressed" ></div>
@@ -35,7 +35,6 @@
             navigator.getBattery().then(b =>  chargingStatus(b.charging) )
 
         navigator.getBattery().then(b =>  b.onchargingchange =e=> chargingStatus(b.charging))
-        var x = "Is the browser online? " + navigator.onLine;
 
 
 

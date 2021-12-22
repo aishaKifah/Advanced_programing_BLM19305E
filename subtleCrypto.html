@@ -47,15 +47,14 @@ const RDR = new FileReader();
 async function  shaFromBuffer(buf) { //ArrayBuffer or ArrayBufferView
 
     console.log(buf)
-    const M = 'küçük şeyler güzeldir'
-   var buffer = new TextEncoder("utf-8").encode(M);
-   var hash_buffer = await crypto.subtle.digest("SHA-1", buffer);
-   let hash_array = Array.from(new Uint8Array(hash_buffer));
-   let hash_hex_str = hash_array.map(byte =>
-     ("00" + byte.toString(16)).slice(-2)).join("");
-    
-    console.log('\nEncodded buffer : '+buffer+'\nhash_buffer: '+ hash_buffer+' \nhash_array'+ hash_array+'\nhash_hex_str: '+hash_hex_str)
-    disp1.innerText=hash_hex_str;
+    var buffer = new TextEncoder("utf-8").encode(buf);
+    var hash_buffer = await crypto.subtle.digest("SHA-1", buffer);
+    let hash_array = Array.from(new Uint8Array(hash_buffer));
+    let hash_hex_str = hash_array.map(byte =>
+    ("00" + byte.toString(16)).slice(-2)).join("");
+                
+    console.log('\nbuffer :'+buf.toString()+'\nEncodded buffer : '+buffer.toString()+'\nhash_buffer: '+ hash_buffer+' \nhash_array'+ hash_array+'\nhash_hex_str: '+hash_hex_str)
+            disp1.innerText=hash_hex_str;
   } 
   function shaFromFile(f) { //File or Blob
     console.log(f.size+" bytes "+f.type)
@@ -64,13 +63,12 @@ async function  shaFromBuffer(buf) { //ArrayBuffer or ArrayBufferView
 
   }
   function shaFromURL(u) { //URL or string
-   
-
-    fetch(u).then(r => r.arrayBuffer())
+    fetch(u).then(r => r.arrayBuffer)
       .then(shaFromBuffer)
+      .catch( error=> disp1.innerText=error) 
   }
-  title.innerText = document.title
-sample.innerText = shaFromBuffer+'\n'+shaFromFile+'\n'+shaFromURL
+    title.innerText = document.title
+    sample.innerText = shaFromBuffer+'\n'+shaFromFile+'\n'+shaFromURL
 function display(x){
     console.log(x);
     disp1.innerText=x.value;
