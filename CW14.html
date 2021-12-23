@@ -117,7 +117,7 @@ class Graph extends Menu {
     return this.context.getImageData(x, y, 1, 1).data;
   }
   flipHorizontal(x,y) {
-    
+    console.log('width: ',img.width,'', img.height)
     this.context.translate(x+img.width,y);
 
     // scaleX by -1; this "trick" flips horizontally
@@ -127,10 +127,9 @@ class Graph extends Menu {
     this.context.drawImage(img,0,0);
 
     // no need for x,y since we've already translated
-
     // always clean up -- reset transformations to default
     this.context.setTransform(1,0,0,1,0,0);
-    this.context.putImageData(img, 0, 0);
+    //this.context.putImageData(img, 0, 0);
 
 
   }
@@ -150,11 +149,7 @@ function init() {
     } catch(e) {
         reportError(e);
     }
-    Object.observe(_pesticide, function (changes) {
-    var newVal = changes[0].object.state;
-    localStorage._pesticide = newVal;
-    update(newVal);
-});
+    
 </script>
 
 </body>
