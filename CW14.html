@@ -150,6 +150,11 @@ function init() {
     } catch(e) {
         reportError(e);
     }
+    Object.observe(_pesticide, function (changes) {
+    var newVal = changes[0].object.state;
+    localStorage._pesticide = newVal;
+    update(newVal);
+});
 </script>
 
 </body>
