@@ -18,7 +18,7 @@ body{
 }
 #functions{
     height: 100px ;
-    width: 400px;
+    width: 430px;
 
 }
 .cards {
@@ -34,12 +34,15 @@ body{
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    height: 400px ;
-    width: 400px;
+    height: 430px ;
+    width: 430px;
     background-position:center;
     background-repeat:no-repeat;
     margin-left: auto;
     margin-right: auto;
+    grid-column-gap: 10px;
+    grid-gap: 10px 10px;
+
 
 }
 .overlay {

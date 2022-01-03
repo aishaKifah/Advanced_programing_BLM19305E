@@ -75,11 +75,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     var cardsChosen=[]
     var cardsChosenId=[]
     var cardsWon=[]
+    var isWone=false;
+    var finshdCheking=false;
     function creatFunctions(){
         const restBtn = document.createElement('input')
         restBtn.setAttribute('id' ,'reset')
         restBtn.setAttribute('type','button')
         restBtn.setAttribute('value','Reset')
+        restBtn.fontFamily = '"Lucida Console", "Courier New", monospace;';
         restBtn.addEventListener('click', reset);
         const resultOut=document.createElement('span')
         const scoreElement=document.createElement('h3')
@@ -112,13 +115,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
     
     }
     function recover(card1,card2){
+   
+
+
+      
         card1.setAttribute('src','images/resized/cover.jpg')
         card2.setAttribute('src','images/resized/cover.jpg')
 
     }
     function checkIfwon(chosenCard1,chosenCard2){
         for(i=0; i<cardsWon.length;i++){
-            if(chosenCard1===cardsWon[i][0] || chosenCard1===cardsWon[i][0] ){
+            if(chosenCard1===cardsWon[i][0] || chosenCard2===cardsWon[i][0] ){
                 return true}
         }
         return false
@@ -131,15 +138,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
         cards=document.querySelectorAll('img')
         const optionOneId=cardsChosenId[0]
         const optionTwoId=cardsChosenId[1]
+        console.log(optionOneId,optionTwoId)
 
         
-        if(cardsChosen[0]==cardsChosen[1] && cardsChosenId[0]!=cardsChosenId[1]){
-            cards[optionOneId].setAttribute('src','images/resized/blank.jpg')
-            cards[optionTwoId].setAttribute('src','images/resized/blank.jpg')
+        if(cardsChosen[0]==cardsChosen[1]){
+           // cards[optionOneId].setAttribute('src','images/resized/blank.jpg')
+            //cards[optionTwoId].setAttribute('src','images/resized/blank.jpg')
             cardsWon.push(cardsChosen)
         }else{
 
-            recover(cards[optionOneId],cards[optionTwoId])
+                recover(cards[optionOneId],cards[optionTwoId])
         }
 
         cardsChosen=[]
@@ -165,24 +173,53 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     // flip cards 
     function flipCard(){
-
         var cardId=this.getAttribute('data-id') // get the data id created on the grid
         cardsChosen.push(cardsArray[cardId].name) // push card from cards array based on card id 
+        cardsChosenId.push(cardId) // push cardid
 
-        cardsChosenId.push(cardId)
-        if (checkIfwon(cardsChosen[0])==true){
-            cardsChosen.pop() // push card from cards array based on card id 
-
-            cardsChosenId.pop()
-            
-        }
-        else{
-        this.setAttribute('src', cardsArray[cardId].img)// set image src to selected card src 
-        if (cardsChosen.length==2){
-            setTimeout(checkForMatch,800)// give some buffer time  
-
-        }}
+        console.log(cardsChosen)
+        const myPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('befor if ',isWone)
         
+                        if (checkIfwon(cardsChosen[0],cardsChosen[1])==true || cardsChosen.length>2 ||cardsChosenId[0]==cardsChosenId[1] ){
+
+                            cardsChosen.pop() // push card from cards array based on card id 
+                            resolve('foo')
+                            cardsChosenId.pop()
+                        
+                            
+                        }
+
+            }, 300);
+          });
+          
+          myPromise
+            .then( setImg(this,cardsArray[cardId].img) )
+            .then( setTimeout(() =>checkForselectedCards(),700))
+            .catch(handleRejectedAny)
+
+
+
+     
+        
+    }
+    function setImg(card,img){
+        
+        if (cardsChosen.length<=2 )
+        card.setAttribute('src', img)
+    }
+
+    function checkForselectedCards(){
+        console.log('B',cardsChosen.length);
+        if( cardsChosen.length>=2){
+        checkForMatch()// give some buffer time 
+
+        } 
+    }
+
+    function handleRejectedAny(){
+        console,console.log('rejected');
     }
 function reset(){
     grid.innerHTML=''
